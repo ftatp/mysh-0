@@ -5,25 +5,27 @@
 #include "commands.h"
 
 int do_cd(int argc, char** argv) {
-  if (!validate_cd_argv(argc, argv))
+	char* path = (char *)malloc(sizeof(char*) * 128);
+	if (!validate_cd_argv(argc, argv))
     return -1;
-
+	strcpy(path, argv[1]);
   // TODO: Fill it!
-	if(chdir(argv[1]))
+	if(chdir(path))
 		printf("No such file or directory\n");
+	free(path);
 	return 0;
 }
 
 int do_pwd(int argc, char** argv) {
-	char* path;
 	size_t path_size = 128;
+	char* path = (char*)malloc(sizeof(char*) * path_size);
 
 	if (!validate_pwd_argv(argc, argv))
     return -1;
   // TODO: Fill it!
-	//getcwd(path, path_size);
-	printf(">> %s\n", getcwd(path, path_size));
-
+	getcwd(path, path_size);
+	printf(">> %s\n", path);
+	free(path);
   return 0;
 }
 
