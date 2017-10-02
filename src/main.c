@@ -16,7 +16,8 @@ int main()
 
 
 	while (1) {
-    	fgets(buf, 8096, stdin);
+		printf(">>");
+		fgets(buf, 8096, stdin);
 		mysh_parse_command(buf, &argc, &argv);
 		
 		if (strcmp(argv[0], "") == 0) {

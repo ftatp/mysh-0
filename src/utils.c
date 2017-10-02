@@ -5,7 +5,7 @@
 #define MAX_INPUT_LENGTH 128
 
 void mysh_parse_command(const char* command,
-                        int *argcp, char*** argvp)
+                        int *p_argc, char*** p_argv)
 {
   // TODO: Fill this!
 	int i;
@@ -15,26 +15,29 @@ void mysh_parse_command(const char* command,
 	//int argc = *argcp;
 	//char** argv = *argvp;
 
-	*argcp = 50;
-	*argvp = (char**)malloc(sizeof(char*) * (*argcp));
-  for(i = 0; i < *argcp; i++){
-	  *(*argvp + i) = (char*)malloc(sizeof(char) * MAX_INPUT_LENGTH);
-		memset(*(*argvp + i), 0, MAX_INPUT_LENGTH);
+	*p_argc = 50;
+	*p_argv = (char**)malloc(sizeof(char*) * (*p_argc));
+	for(i = 0; i < *p_argc; i++){
+	  *(*p_argv + i) = (char*)malloc(sizeof(char) * MAX_INPUT_LENGTH);
+		memset(*(*p_argv + i), 0, MAX_INPUT_LENGTH);
 	}
 
-	printf("command: %s\n", command);
+	//printf("command: %s\n", command);
 
 	strcpy(buf, command);
 	buf[strlen(buf) - 1] = 0;
 
 	i = 0;
+	*p_argc = 0;
 	token = strtok(buf, " ");
 	while(token != NULL){
-		strcpy(*(*argvp + (i++)), token);
+		*p_argc = *p_argc + 1;
+		strcpy(*(*p_argv + (i++)), token);
 		token = strtok(NULL, " ");
-		printf("%s\n", *(*argvp + (i - 1)));
+	//	printf("%s\n", *(*p_argv + (i - 1)));
 	}
 
+	//printf("argc: %d\n", *p_argc);
 	free(buf);
 	free(token);
 }
