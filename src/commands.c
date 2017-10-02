@@ -1,6 +1,6 @@
 #include <string.h>
 #include <unistd.h>
-#include <stdio.h>
+//#include <stdio.h>
 
 #include "commands.h"
 
@@ -21,8 +21,8 @@ int do_pwd(int argc, char** argv) {
 	if (!validate_pwd_argv(argc, argv))
     return -1;
   // TODO: Fill it!
-	getcwd(path, path_size);
-	printf(">> %s\n", path);
+	//getcwd(path, path_size);
+	printf(">> %s\n", getcwd(path, path_size));
 
   return 0;
 }
